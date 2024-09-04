@@ -1,0 +1,27 @@
+#imageZoom {
+    width: 550px;
+    height: 700px;
+    position: relative;
+    overflow: hidden;
+}
+
+#imageZoom img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#imageZoom::after {
+    display: none;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    background-image: var(--url);
+    background-size: 200%;
+    background-position: var(--zoom-x) var(--zoom-y);
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+}
