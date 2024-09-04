@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liked Items</title>
+    <style>
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: #fff3e0;
+            color: #5e3709;
+            margin: 0;
+            padding: 20px;
+            background-image: url('back.png'); /* Use a more traditional Indian background */
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .liked-items {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 250, 240, 0.95); /* Softer off-white */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border: 3px solid #8c4a1d;
+            background-size: contain;
+        }
+
+        .liked-items h2 {
+            margin-bottom: 20px;
+            color: #d2691e;
+            font-size: 26px;
+            border-bottom: 2px solid #b5651d;
+            padding-bottom: 10px;
+            text-align: center;
+            font-family: 'Tangerine', cursive; /* Decorative Indian-style font */
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #d2691e;
+            border-left: 5px solid #d2691e;
+            background-color: #faf0e6;
+            border-radius: 10px;
+            background-size: cover;
+        }
+
+        .item img {
+            width: 80px;
+            height: auto;
+            margin-right: 20px;
+            border-radius: 5px;
+            border: 2px solid #d2691e;
+        }
+
+        .item h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #8c4a1d;
+            font-family: 'Merriweather', serif;
+        }
+
+        .item p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            color: #6f4e37;
+            font-family: 'Merriweather', serif;
+        }
+
+        .no-items {
+            text-align: center;
+            font-size: 18px;
+            color: #6f4e37;
+            margin-top: 50px;
+            font-family: 'Tangerine', cursive;
+        }
+    </style>
+</head>
+<body>
+    <div class="liked-items">
+        <h2>Your Liked Items</h2>
+        <div id="items-container">
+            <!-- Liked items will be dynamically inserted here -->
+        </div>
+        <div id="no-items-message" class="no-items" style="display: none;">
+            No liked items.
+        </div>
+    </div>
+
+    <script>
+        // Simulate liked items data
+        const likedItems = [
+            {
+                imgSrc: 'saree_img.webp',
+                title: 'Kanchipattu saree',
+                price: '$59.62'
+            },
+            {
+                imgSrc: 'jewel_img.webp',
+                title: 'Handmade rings',
+                price: '$90.42'
+            }
+        ];
+
+        const itemsContainer = document.getElementById('items-container');
+        const noItemsMessage = document.getElementById('no-items-message');
+
+        if (likedItems.length > 0) {
+            likedItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('item');
+
+                itemElement.innerHTML = `
+                    <img src="${item.imgSrc}" alt="${item.title}">
+                    <div>
+                        <h3>${item.title}</h3>
+                        <p>${item.price}</p>
+                    </div>
+                `;
+                itemsContainer.appendChild(itemElement);
+            });
+        } else {
+            noItemsMessage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
