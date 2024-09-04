@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Tradition Shopping</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&display=swap">
+    <!--<script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datamaps@0.5.7/dist/datamaps.all.min.js"></script>-->
+    <style>
+        body {
+            font-family: 'Prata', serif;
+            background-color: #f5f5dc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #b5651d;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Prata', serif;
+        }
+
+        .nav-icons .icon {
+            margin-left: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .nav-icons .login-signup {
+            margin-left: 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .username-display {
+            font-size: 18px;
+            margin-left: 20px;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Side Menu */
+        .side-menu {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            background-color: #b5651d;
+            color: white;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .side-menu a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .side-menu a:hover {
+            background-color: #f5f5dc;
+            color: #b5651d;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        .side-menu .section-title {
+            margin: 10px 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #fff;
+        }
+
+        .side-menu .submenu a {
+            font-size: 16px;
+            padding-left: 30px;
+        }
+
+        /* Slideshow */
+        .slideshow {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            max-width: 1000px;
+            margin: 20px auto;
+            border: 10px solid #b5651d;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px;
+        }
+
+        .slideshow-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .slideshow-controls span {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        /* State Buttons */
+        .state-buttons {
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+            margin: 20px auto;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .state-button {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            margin: 0 10px;
+            text-align: center;
+            background-color: #fff;
+            border: 2px solid #b5651d;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .state-button img {
+            width: 40px;
+            height: 40px;
+            margin-top: 10px;
+        }
+
+        .state-button h4 {
+            font-size: 10px;
+            margin: 5px 0;
+            color: #b5651d;
+        }
+
+        .state-button:hover {
+            background-color: #f5f5dc;
+            transform: scale(1.05);
+        }
+
+        .state-button-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .arrow {
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #b5651d;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 14px;
+        }
+        /*.map-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        #india {
+            height: 600px;
+            width: 900px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .popup {
+            position: absolute;
+            padding: 15px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .popup.show {
+            opacity: 1;
+            transform: perspective(600px) translateZ(50px);
+        }
+
+        .datamaps-subunit.hovered {
+            fill: #FFDD44;
+        }*/
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">
+            &#9776; <!-- Hamburger icon -->
+        </div>
+        <div class="logo">Indian Tradition</div>
+        <div class="nav-icons">
+            <span class="icon liked-products" onclick="redirectToLikedItems()">&#10084;</span>
+            <span class="icon cart" onclick="redirectToshoppingcartItems()">&#128722;</span>
+            <span class="login-signup" id="login-signup" onclick="redirectToLogin()">Login/Sign Up</span>
+        </div>
+    </header>
+
+    <!-- Side Menu -->
+    <div id="sideMenu" class="side-menu">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleMenu()">&times;</a>
+        <div class="section-title">Shop by Category</div>
+        <a href="#">Clothing</a>
+        <a href="#">Jewelry</a>
+        <a href="#">Home Decor</a>
+        <a href="#">Spices</a>
+        <a href="#">Antiques</a>
+
+        <div class="section-title">Your Orders</div>
+        <a href="#">Order History</a>
+        <a href="#">Track Orders</a>
+
+        <div class="section-title" id="account-section-title">Account</div>
+        <a href="#" id="account-link" onclick="redirectToLogin()">Login/Sign Up</a>
+        <a href="#">Payment Methods</a>
+        <a href="#">Address Book</a>
+
+        <div class="section-title">Customer Service</div>
+        <a href="#">Help</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact Us</a>
+    </div>
+
+    <section class="map-section">
+        <div id="india"></div>
+        <div id="popup" class="popup"></div>
+    </section>
+    <!-- Slideshow -->
+    <section class="slideshow">
+        <div class="slide-container">
+            <div class="slide">
+                <img src="saree_banner.png" alt="Saree">
+            </div>
+            <div class="slide">
+                <img src="antiques_banner.gif" alt="Antiques">
+            </div>
+            <div class="slide">
+                <img src="spices_banner.png" alt="Spices">
+            </div>
+        </div>
+        <div class="slideshow-controls">
+            <span class="arrow" onclick="prevSlide()">&#10094;</span>
+            <span class="arrow" onclick="nextSlide()">&#10095;</span>
+        </div>
+    </section>
+
+    <!-- State Buttons -->
+    <section class="state-buttons">
+        <!-- <div class="state-button" onclick="window.location.href='state1.html'">
+            <img src="state1_icon.png" alt="State 1">
+            <h4>Andhra Pradesh</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state2.html'">
+            <img src="state2_icon.png" alt="State 2">
+            <h4>Arunachal Pradesh</h4>
+        </div> -->
+        <div class="state-button" onclick="window.location.href='insideTelangana.html'">
+            <img src="state24_icon.png" alt="State 24">
+            <h4>Telangana</h4>
+        </div>
+
+        <div class="state-button" onclick="window.location.href='insideRajastan.html'">
+            <img src="state21_icon.png" alt="State 21">
+            <h4>Rajasthan</h4>
+        </div>
+        <div class="state-button" onclick="window.location.href='state3.html'">
+            <img src="state3_icon.png" alt="State 3">
+            <h4>Assam</h4>
+        </div>
+        <!-- <div class="state-button" onclick="window.location.href='state4.html'">
+            <img src="state4_icon.png" alt="State 4">
+            <h4>Bihar</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state5.html'">
+            <img src="state5_icon.png" alt="State 5">
+            <h4>Chhattisgarh</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state6.html'">
+            <img src="state6_icon.png" alt="State 6">
+            <h4>Goa</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state7.html'">
+            <img src="state7_icon.png" alt="State 7">
+            <h4>Gujarat</h4>
+        </div> -->
+        <div class="state-button" onclick="window.location.href='state8.html'">
+            <img src="state8_icon.png" alt="State 8">
+            <h4>Haryana</h4>
+        </div>
+        <!-- <div class="state-button" onclick="window.location.href='state9.html'">
+            <img src="state9_icon.png" alt="State 9">
+            <h4>Himachal Pradesh</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state10.html'">
+            <img src="state10_icon.png" alt="State 10">
+            <h4>Jharkhand</h4>
+        </div> -->
+        <div class="state-button" onclick="window.location.href='state11.html'">
+            <img src="state11_icon.png" alt="State 11">
+            <h4>Karnataka</h4>
+        </div>
+        <!-- <div class="state-button" onclick="window.location.href='state12.html'">
+            <img src="state12_icon.png" alt="State 12">
+            <h4>Kerala</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state13.html'">
+            <img src="state13_icon.png" alt="State 13">
+            <h4>Madhya Pradesh</h4>
+        </div> -->
+        <div class="state-button" onclick="window.location.href='state14.html'">
+            <img src="state14_icon.png" alt="State 14">
+            <h4>Maharashtra</h4>
+        </div>
+        <!-- <div class="state-button" onclick="window.location.href='state15.html'">
+            <img src="state15_icon.png" alt="State 15">
+            <h4>Manipur</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state16.html'">
+            <img src="state16_icon.png" alt="State 16">
+            <h4>Meghalaya</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state17.html'">
+            <img src="state17_icon.png" alt="State 17">
+            <h4>Mizoram</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state18.html'">
+            <img src="state18_icon.png" alt="State 18">
+            <h4>Nagaland</h4>
+        </div> -->
+        <div class="state-button" onclick="window.location.href='state19.html'">
+            <img src="state19_icon.png" alt="State 19">
+            <h4>Odisha</h4>
+        </div>
+        <div class="state-button" onclick="window.location.href='state20.html'">
+            <img src="state20_icon.png" alt="State 20">
+            <h4>Punjab</h4>
+        </div>
+        
+        <!-- <div class="state-button" onclick="window.location.href='state22.html'">
+            <img src="state22_icon.png" alt="State 22">
+            <h4>Sikkim</h4>
+        </div> -->
+        <div class="state-button" onclick="window.location.href='state23.html'">
+            <img src="state23_icon.png" alt="State 23">
+            <h4>Tamil Nadu</h4>
+        </div>
+        
+        <!-- <div class="state-button" onclick="window.location.href='state25.html'">
+            <img src="state25_icon.png" alt="State 25">
+            <h4>Tripura</h4>
+        </div> -->
+        <div class="state-button" onclick="window.location.href='state26.html'">
+            <img src="state26_icon.png" alt="State 26">
+            <h4>Uttar Pradesh</h4>
+        </div>
+        <!-- <div class="state-button" onclick="window.location.href='state27.html'">
+            <img src="state27_icon.png" alt="State 27">
+            <h4>Uttarakhand</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state28.html'">
+            <img src="state28_icon.png" alt="State 28">
+            <h4>West Bengal</h4>
+        </div> -->
+        <!-- <div class="state-button" onclick="window.location.href='state29.html'">
+            <img src="state29_icon.png" alt="State 28">
+            <h4>Jammu and Kashmir</h4>
+        </div> -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Indian Tradition. All rights reserved.
+    </footer>
+
+    <script>
+        function redirectToLogin() {
+            window.location.href = 'login.html';
+        }
+        function redirectToLikedItems() {
+            window.location.href = 'liked_items.html';
+        }
+
+        function redirectToshoppingcartItems() {
+            window.location.href = 'shopping_cart.html';
+        }
+
+        window.onload = function() {
+        const currentUser = localStorage.getItem('currentUser');
+        if (currentUser) {
+            document.getElementById('login-signup').innerText = currentUser;
+            document.getElementById('login-signup').onclick = function() {
+                alert('You are already signed in as ' + currentUser);
+            };
+        }
+    };
+
+
+        // Display the current logged-in user
+        const currentUser = localStorage.getItem('currentUser');
+        document.getElementById('usernameDisplay').textContent = currentUser || 'Guest';
+        // Side Menu Toggle
+        function toggleMenu() {
+            var sideMenu = document.getElementById('sideMenu');
+            if (sideMenu.style.left === '0px') {
+                sideMenu.style.left = '-250px';
+            } else {
+                sideMenu.style.left = '0px';
+            }
+        }
+
+        // Slideshow
+        var currentSlide = 0;
+        var slides = document.querySelectorAll('.slide');
+        var totalSlides = slides.length;
+
+        function showSlide(index) {
+            var newIndex = (index + totalSlides) % totalSlides;
+            var slideContainer = document.querySelector('.slide-container');
+            slideContainer.style.transform = 'translateX(' + (-newIndex * 100) + '%)';
+            currentSlide = newIndex;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        setInterval(nextSlide, 5000); // Auto-slide every 5 seconds
+
+        // State Buttons Scrolling
+        function scrollLeft() {
+            var container = document.querySelector('.state-buttons');
+            container.scrollLeft -= 150;
+        }
+
+        function scrollRight() {
+            var container = document.querySelector('.state-buttons');
+            container.scrollLeft += 150;
+        }
+
+        // Map Setup
+        var map = new Datamap({
+            element: document.getElementById('india'),
+            scope: 'india',
+            responsive: true,
+            fills: {
+                defaultFill: '#d9d9d9',
+                'State 1': '#f4a261',
+                'State 2': '#2a9d8f',
+                'State 3': '#e76f51'
+            },
+            geographyConfig: {
+                popupTemplate: function(geo, data) {
+                    return '<div class="popup">' +
+                        '<strong>' + geo.properties.name + '</strong><br>' +
+                        (data ? data.info : 'No information available') +
+                        '</div>';
+                },
+                highlightOnHover: true,
+                highlightFillColor: '#ffdd44',
+                highlightBorderColor: '#000',
+                highlightBorderWidth: 2
+            },
+            data: {
+                'State 1': { fillKey: 'State 1', info: 'Details about State 1' },
+                'State 2': { fillKey: 'State 2', info: 'Details about State 2' },
+                'State 3': { fillKey: 'State 3', info: 'Details about State 3' }
+            },
+            setProjection: function(element) {
+                var projection = d3.geo.mercator()
+                    .center([78.9629, 23.5937])
+                    .scale(1000)
+                    .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+                var path = d3.geo.path().projection(projection);
+                return { path: path, projection: projection };
+            }
+        });
+
+        // Show popup on hover
+        document.querySelector('#india').addEventListener('mousemove', function(event) {
+            var target = event.target;
+            if (target.classList.contains('datamaps-subunit')) {
+                var popup = document.getElementById('popup');
+                var data = target.__data__;
+                if (data) {
+                    popup.innerHTML = '<strong>' + data.properties.name + '</strong><br>' +
+                        (data.info ? data.info : 'No information available');
+                    popup.classList.add('show');
+                    popup.style.top = (event.clientY + 10) + 'px';
+                    popup.style.left = (event.clientX + 10) + 'px';
+                }
+            }
+        });
+
+        document.querySelector('#india').addEventListener('mouseleave', function() {
+            var popup = document.getElementById('popup');
+            popup.classList.remove('show');
+        });
+    </script>
+</body>
+</html>
