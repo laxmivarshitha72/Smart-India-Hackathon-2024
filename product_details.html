@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <div class="product-details-container">
+        <h1 id="product-name">Product Name</h1>
+        <div class="product-images">
+            <img id="main-image" src="pochampally.png" alt="Product Image">
+            <!-- Add thumbnails or additional images if needed -->
+        </div>
+        <div class="product-info">
+            <p id="product-price">$10</p>
+            <p id="product-description">This is a great product...</p>
+            <p id="seller-details">Seller: John Doe</p>
+        </div>
+    </div>
+
+    <script>
+        // Assuming the product details are passed via query string
+        let params = new URLSearchParams(window.location.search);
+        let productId = params.get('id');
+        
+        let products = [
+            {
+                id: 1,
+                name: 'PRODUCT NAME 1',
+                image: 'pochampally.png',
+                price: 120000,
+                description: 'This is the description for product 1.',
+                seller: 'Seller 1'
+            },
+            // Add other products here
+        ];
+
+        // Fetch the product details based on the ID
+        let product = products.find(p => p.id == productId);
+
+        if (product) {
+            document.getElementById('product-name').innerText = product.name;
+            document.getElementById('main-image').src = product.image;
+            document.getElementById('product-price').innerText = `$${product.price.toLocaleString()}`;
+            document.getElementById('product-description').innerText = product.description;
+            document.getElementById('seller-details').innerText = `Seller: ${product.seller}`;
+        } else {
+            document.body.innerHTML = "<h1>Product not found</h1>";
+        }
+
+        
+    </script>
+</body>
+</html>
