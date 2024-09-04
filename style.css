@@ -1,0 +1,141 @@
+/* General styling and reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif;
+    overflow: hidden;
+    height: 100%;
+    background-color:#f5f5dc; /* Set background color to white */
+}
+
+/* Intro section styling */
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+/* Rotating image styling */
+.rotating-image {
+    position: absolute;
+    width: auto;
+    height: 100vh; /* Occupy full vertical height */
+    animation-duration: 10s; /* Duration of the animation */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.left-image {
+    left: 50%; /* Start from center */
+    transform-origin: center; /* Rotate from the center of the image */
+    animation-name: rotateLeft;
+}
+
+.right-image {
+    right: 50%; /* Start from center */
+    transform-origin: center; /* Rotate from the center of the image */
+    animation-name: rotateRight;
+}
+
+@keyframes rotateLeft {
+    0% {
+        transform: translateX(0) rotate(0deg); /* Start at center */
+    }
+    50% {
+        transform: translateX(50vw) rotate(180deg); /* Move left and rotate halfway */
+    }
+    100% {
+        transform: translateX(100vw) rotate(360deg); /* Move completely to the left and rotate fully */
+    }
+}
+
+@keyframes rotateRight {
+    0% {
+        transform: translateX(10) rotate(0deg); /* Start at center */
+    }
+    50% {
+        transform: translateX(-50vw) rotate(-180deg); /* Move right and rotate halfway */
+    }
+    100% {
+        transform: translateX(-100vw) rotate(-360deg); /* Move completely to the right and rotate fully */
+    }
+}
+
+/* Brand name styling */
+.brand-name {
+    font-size: 52px;
+    color: #d0021b;
+    font-family: 'Brush Script MT', cursive;
+    opacity: 0;
+    animation: fadeIn 3s forwards;
+}
+
+/* Motif container and motifs styling */
+.motif-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.motif {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0;
+    transform: scale(0);
+    animation: popUp 4s forwards;
+}
+
+/* .motif1 {
+    background-image: url('Buy\ Decorative\ Art\ Online\ _\ Jaypore.jpeg');
+    animation: popUp 3s forwards 2s;
+} */
+
+/* .motif2 {
+    background-image: url('download\ \(1\).jpeg');
+    animation: popUp 3s forwards 3s;
+} */
+
+/* .motif3 {
+    background-image: url('Traditional\ Mughal\ Frame\,\ wallpaper.jpeg');
+    animation: popUp 3s forwards 4s;
+} */
+
+/* Bottom motif styling */
+.motif-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Set the height to make it visible */
+    background: url('a1.jpg') repeat-x; /* Repeat the motif horizontally */
+    background-size: contain; /* Ensure the motif is scaled proportionately */
+    z-index: 1;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
